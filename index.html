@@ -3,138 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Modern & Interactive</title>
+    <title>3D Interactive Portfolio</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            cursor: none;
         }
 
         body {
-            background-color: #0d0f12;
-            color: #f3f4f6;
+            background-color: #08090a;
+            color: #ffffff;
             overflow-x: hidden;
         }
 
-        /* Ambient Glow Background */
-        .glow-bg {
+        /* 3D Canvas Background */
+        #webgl-bg {
             position: fixed;
-            top: -20%;
-            left: -10%;
-            width: 50vw;
-            height: 50vw;
-            background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
-            border-radius: 50%;
-            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
             pointer-events: none;
         }
 
-        .glow-bg-2 {
+        /* Custom Glowing Cursor */
+        #cursor {
             position: fixed;
-            bottom: -20%;
-            right: -10%;
-            width: 50vw;
-            height: 50vw;
-            background: radial-gradient(circle, rgba(79, 172, 254, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            width: 20px;
+            height: 20px;
+            background: #00f2fe;
             border-radius: 50%;
-            z-index: -1;
             pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px #00f2fe, 0 0 40px #00f2fe;
+            transition: transform 0.1s ease, width 0.2s, height 0.2s;
         }
 
-        /* Hero Section */
+        /* Content Overlay */
+        .content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
         header {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
+            align-items: flex-start;
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: 5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, #00f2fe 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
+            margin-bottom: 24px;
         }
 
-        p.subtitle {
+        p.hero-desc {
             font-size: 1.25rem;
-            color: #9ca3af;
-            max-width: 600px;
-            margin-bottom: 40px;
+            color: #a0aec0;
+            max-width: 500px;
             line-height: 1.6;
         }
 
-        /* Interactive Card */
-        .projects {
-            max-width: 1100px;
-            margin: 0 auto 100px auto;
-            padding: 0 20px;
+        /* Grid Cards with Glow Effect */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
+            padding-bottom: 120px;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            cursor: pointer;
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(12px);
+            transition: transform 0.2s ease, border-color 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(0, 242, 254, 0.5);
-            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.1);
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(0, 242, 254, 0.15), transparent 40%);
+            z-index: 0;
+            pointer-events: none;
         }
 
         .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-            color: #ffffff;
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
         }
 
         .card p {
-            color: #9ca3af;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            color: #718096;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
 
-    <div class="glow-bg"></div>
-    <div class="glow-bg-2"></div>
+    <div id="cursor"></div>
+    <canvas id="webgl-bg"></canvas>
 
-    <header>
-        <h1>Creative Portfolio</h1>
-        <p class="subtitle">Designing modern interactive digital experiences with cutting-edge UI/UX aesthetics.</p>
-    </header>
+    <div class="content">
+        <header>
+            <h1>Interactive<br>Design Portfolio</h1>
+            <p class="hero-desc">Experience 3D WebGL visuals, real-time lighting, and custom cursor animations.</p>
+        </header>
 
-    <section class="projects">
-        <div class="card">
-            <h3>3D Interactive Landscapes</h3>
-            <p>Immersive WebGL experience built with Three.js and custom shaders.</p>
-        </div>
-        <div class="card">
-            <h3>Glow Transformation UI</h3>
-            <p>Dynamic visual design featuring smooth transitions and interactive lighting.</p>
-        </div>
-        <div class="card">
-            <h3>Custom Cursor Animations</h3>
-            <p>Fluid, physics-based mouse cursor interactions for sleek navigation.</p>
-        </div>
-    </section>
+        <section class="grid">
+            <div class="card">
+                <h3>3D WebGL Environments</h3>
+                <p>Real-time geometry rendering using Three.js with custom lighting and mouse interactions.</p>
+            </div>
+            <div class="card">
+                <h3>Dynamic Cursor Effects</h3>
+                <p>Smooth cursor tracking with fluid physics and proximity-based canvas responses.</p>
+            </div>
+            <div class="card">
+                <h3>Interactive UI Components</h3>
+                <p>Glassmorphic design panels with mouse-aware radial highlight borders.</p>
+            </div>
+        </section>
+    </div>
 
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        let mouseX = 0, mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+
+            // Card Glow Tracking
+            document.querySelectorAll('.card').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Three.js 3D Background Setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-bg'), alpha: true, antialias: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Create 3D Floating Geometry
+        const geometry = new THREE.IcosahedronGeometry(2, 1);
+        const material = new THREE.MeshStandardMaterial({
+            color: 0x00f2fe,
+            wireframe: true,
+            roughness: 0.2,
+            metalness: 0.8
+        });
+
+        const shape = new THREE.Mesh(geometry, material);
+        shape.position.set(3, 0, 0);
+        scene.add(shape);
+
+        // Lighting
+        const pointLight = new THREE.PointLight(0x00f2fe, 2, 100);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+        scene.add(ambientLight);
+
+        camera.position.z = 6;
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotate Shape
+            shape.rotation.x += 0.005;
+            shape.rotation.y += 0.005;
+
+            // Mouse Interaction Offset
+            shape.position.x = 3 + (mouseX / window.innerWidth - 0.5) * 1.5;
+            shape.position.y = -(mouseY / window.innerHeight - 0.5) * 1.5;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Responsive Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
 </body>
 </html>
