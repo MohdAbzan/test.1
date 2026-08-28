@@ -4,22 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abzan® | Portfolio</title>
-
-  <!-- Fonts -->
-  <link rel="stylesheet" href="https://db.onlinewebfonts.com/c/5ac3fe7c6abd2f62067f266d89671492?family=HelveticaNowDisplay-Medium" />
-  <link rel="stylesheet" href="https://db.onlinewebfonts.com/c/1aa3377e489837a26d019bba501e779d?family=HelveticaNowDisplayW01-Rg" />
-
+  
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- React & ReactDOM CDNs -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-
   <style>
     :root {
-      --font-heading: 'HelveticaNowDisplay-Medium', 'Helvetica Neue', Arial, sans-serif;
-      --font-body: 'HelveticaNowDisplayW01-Rg', 'Helvetica Neue', Arial, sans-serif;
+      --font-heading: 'Helvetica Neue', Arial, sans-serif;
+      --font-body: 'Helvetica Neue', Arial, sans-serif;
     }
     body {
       font-family: var(--font-body);
@@ -33,236 +25,241 @@
     .animate-blink {
       animation: blink 1s step-end infinite;
     }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-pills {
+      animation: fadeInUp 0.4s ease-out 0.4s forwards;
+      opacity: 0;
+    }
   </style>
 </head>
-<body>
-  <div id="root"></div>
+<body class="bg-black text-white selection:bg-white selection:text-black min-h-screen w-full relative">
+
+  <!-- Background Video -->
+  <video
+    id="bgVideo"
+    src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260826_041744_63efcd78-bf7d-4039-99e2-2461e8a61903.mp4"
+    muted
+    playsinline
+    preload="auto"
+    class="fixed inset-0 z-0 h-full w-full object-cover object-[70%_center]"
+  ></video>
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 z-10 flex w-full items-center justify-between px-5 py-4 sm:px-8 sm:py-5">
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <span class="text-[21px] font-medium tracking-tight text-white sm:text-[26px]">
+        Abzan®
+      </span>
+      <span class="select-none text-[25px] leading-none text-white sm:text-[30px]" style="letter-spacing: -0.02em;">
+        ✳︎
+      </span>
+    </div>
+
+    <!-- Desktop Nav Links -->
+    <div class="hidden items-center text-[23px] text-white md:flex">
+      <a href="#experience" class="transition-opacity hover:opacity-60">Experience</a><span>,&nbsp;</span>
+      <a href="#skills" class="transition-opacity hover:opacity-60">Skills</a><span>,&nbsp;</span>
+      <a href="#certifications" class="transition-opacity hover:opacity-60">Certifications</a><span>,&nbsp;</span>
+      <a href="#education" class="transition-opacity hover:opacity-60">Education</a>
+    </div>
+
+    <!-- Desktop CTA -->
+    <a 
+      href="mailto:mohdabzan2003@gmail.com" 
+      className="hidden text-[23px] text-white underline underline-offset-2 transition-opacity hover:opacity-60 md:block"
+    >
+      Get in touch
+    </a>
+
+    <!-- Mobile Hamburger -->
+    <button
+      id="menuBtn"
+      class="relative z-20 flex flex-col items-center justify-center gap-[5px] focus:outline-none md:hidden"
+      aria-label="Toggle Navigation"
+    >
+      <span id="bar1" class="h-[2px] w-6 bg-white transition-all duration-300"></span>
+      <span id="bar2" class="h-[2px] w-6 bg-white transition-all duration-300"></span>
+      <span id="bar3" class="h-[2px] w-6 bg-white transition-all duration-300"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div 
+    id="mobileMenu"
+    class="fixed inset-0 z-[9] flex flex-col justify-center gap-8 bg-black/90 px-8 backdrop-blur-md transition-opacity duration-300 pointer-events-none opacity-0 md:hidden"
+  >
+    <a href="#experience" class="mobile-link text-[32px] font-medium text-white">Experience</a>
+    <a href="#skills" class="mobile-link text-[32px] font-medium text-white">Skills</a>
+    <a href="#certifications" class="mobile-link text-[32px] font-medium text-white">Certifications</a>
+    <a href="#education" class="mobile-link text-[32px] font-medium text-white">Education</a>
+    <a href="mailto:mohdabzan2003@gmail.com" class="mobile-link text-[32px] font-medium text-white underline underline-offset-4">Get in touch</a>
+  </div>
+
+  <!-- Hero Section -->
+  <main class="relative z-[1] flex h-screen flex-col justify-end overflow-hidden px-5 pb-12 sm:px-8 md:justify-center md:px-10 md:pb-0">
+    <div class="relative z-10 max-w-xl">
+      <!-- Blurred Intro Label -->
+      <div 
+        class="pointer-events-none mb-5 select-none sm:mb-6"
+        style="font-size: clamp(18px, 4vw, 26px); line-height: 1.3; font-weight: 400; color: #fff; filter: blur(4px);"
+      >
+        Hello, I am Mohammed Abzan,<br />
+        dnata (Emirates Group) | Dubai, UAE
+      </div>
+
+      <!-- Typewriter Text -->
+      <p 
+        class="mb-5 text-white sm:mb-6"
+        style="font-size: clamp(18px, 4vw, 26px); line-height: 1.35; font-weight: 400; min-height: 54px;"
+      >
+        <span id="typewriterText"></span><span id="cursor" class="ml-[2px] inline-block h-[1.1em] w-[2px] align-middle bg-white animate-blink"></span>
+      </p>
+
+      <!-- Action Pills -->
+      <div class="flex flex-wrap gap-y-1 animate-pills">
+        <a
+          href="https://linkedin.com/in/mohdabzan"
+          target="_blank"
+          class="mx-[0.2em] mb-[0.4em] inline-flex whitespace-nowrap items-center justify-center rounded-full border border-black/10 bg-white px-4 py-[0.3em] text-[13px] text-black transition-colors duration-200 hover:bg-black hover:text-white sm:px-5 sm:text-[15px]"
+        >
+          View LinkedIn
+        </a>
+
+        <a
+          href="tel:+971565754523"
+          class="mx-[0.2em] mb-[0.4em] inline-flex whitespace-nowrap items-center justify-center rounded-full border border-black/10 bg-white px-4 py-[0.3em] text-[13px] text-black transition-colors duration-200 hover:bg-black hover:text-white sm:px-5 sm:text-[15px]"
+        >
+          Call +971 56 575 4523
+        </a>
+
+        <button
+          onclick="copyEmail()"
+          class="mx-[0.2em] mb-[0.4em] inline-flex whitespace-nowrap items-center justify-center gap-2 rounded-full border border-white bg-transparent px-4 py-[0.3em] text-[13px] text-white transition-colors duration-200 hover:bg-white hover:text-black sm:gap-3 sm:px-5 sm:text-[15px]"
+        >
+          <span>
+            Email: <span class="underline underline-offset-1">mohdabzan2003@gmail.com</span>
+          </span>
+          <svg 
+            width="12" 
+            height="12" 
+            viewBox="0 0 12 12" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+            class="shrink-0 stroke-current"
+          >
+            <rect x="1.5" y="3.5" width="7" height="7" rx="1" stroke-width="1.2" />
+            <path d="M3.5 1.5H9.5V7.5" stroke-width="1.2" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </main>
 
   <script>
-    const e = React.createElement;
-    const { useState, useEffect, useRef, Fragment } = React;
+    // Video Mouse Scrubbing
+    const video = document.getElementById('bgVideo');
+    let prevX = null;
+    let targetTime = 0;
+    let isSeeking = false;
 
-    function useTypewriter(text, speed = 35, startDelay = 500) {
-      const [displayed, setDisplayed] = useState('');
-      const [done, setDone] = useState(false);
+    window.addEventListener('mousemove', (e) => {
+      if (!video || !video.duration) return;
 
-      useEffect(() => {
-        let index = 0;
-        let interval;
+      if (prevX === null) {
+        prevX = e.clientX;
+        return;
+      }
 
-        const timer = setTimeout(() => {
-          interval = setInterval(() => {
-            if (index < text.length) {
-              setDisplayed(text.substring(0, index + 1));
-              index++;
-            } else {
-              setDone(true);
-              clearInterval(interval);
-            }
-          }, speed);
-        }, startDelay);
+      const delta = e.clientX - prevX;
+      prevX = e.clientX;
 
-        return () => {
-          clearTimeout(timer);
-          if (interval) clearInterval(interval);
-        };
-      }, [text, speed, startDelay]);
+      const SENSITIVITY = 0.8;
+      const timeOffset = (delta / window.innerWidth) * SENSITIVITY * video.duration;
+      targetTime = Math.max(0, Math.min(video.duration, targetTime + timeOffset));
 
-      return { displayed, done };
-    }
+      if (!isSeeking) {
+        isSeeking = true;
+        video.currentTime = targetTime;
+      }
+    });
 
-    function App() {
-      const videoRef = useRef(null);
-      const prevXRef = useRef(null);
-      const targetTimeRef = useRef(0);
-      const isSeekingRef = useRef(false);
+    video.addEventListener('seeked', () => {
+      if (Math.abs(video.currentTime - targetTime) > 0.05) {
+        video.currentTime = targetTime;
+      } else {
+        isSeeking = false;
+      }
+    });
 
-      const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-      const [showPills, setShowPills] = useState(false);
+    // Typewriter Effect
+    const fullText = "Admin & Operations professional specializing in cargo logistics, document control, and customer service. How can we collaborate?";
+    const textEl = document.getElementById('typewriterText');
+    const cursorEl = document.getElementById('cursor');
+    let index = 0;
 
-      const typewriterText = "Admin & Operations professional specializing in cargo logistics, document control, and customer service. How can we collaborate?";
-      const { displayed, done } = useTypewriter(typewriterText, 35, 500);
-
-      useEffect(() => {
-        const timer = setTimeout(() => {
-          setShowPills(true);
-        }, 400);
-        return () => clearTimeout(timer);
-      }, []);
-
-      useEffect(() => {
-        const handleMouseMove = (e) => {
-          const video = videoRef.current;
-          if (!video || !video.duration) return;
-
-          if (prevXRef.current === null) {
-            prevXRef.current = e.clientX;
-            return;
-          }
-
-          const delta = e.clientX - prevXRef.current;
-          prevXRef.current = e.clientX;
-
-          const SENSITIVITY = 0.8;
-          const timeOffset = (delta / window.innerWidth) * SENSITIVITY * video.duration;
-          let nextTarget = targetTimeRef.current + timeOffset;
-
-          nextTarget = Math.max(0, Math.min(video.duration, nextTarget));
-          targetTimeRef.current = nextTarget;
-
-          if (!isSeekingRef.current) {
-            isSeekingRef.current = true;
-            video.currentTime = nextTarget;
-          }
-        };
-
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
-      }, []);
-
-      const handleSeeked = () => {
-        const video = videoRef.current;
-        if (!video) return;
-
-        if (Math.abs(video.currentTime - targetTimeRef.current) > 0.05) {
-          video.currentTime = targetTimeRef.current;
+    setTimeout(() => {
+      const interval = setInterval(() => {
+        if (index < fullText.length) {
+          textEl.textContent += fullText.charAt(index);
+          index++;
         } else {
-          isSeekingRef.current = false;
+          clearInterval(interval);
+          cursorEl.style.display = 'none';
         }
-      };
+      }, 35);
+    }, 500);
 
-      const copyEmail = () => {
-        navigator.clipboard.writeText("mohdabzan2003@gmail.com");
-      };
+    // Mobile Navigation Toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const bar1 = document.getElementById('bar1');
+    const bar2 = document.getElementById('bar2');
+    const bar3 = document.getElementById('bar3');
+    let isOpen = false;
 
-      return e('div', { className: 'relative min-h-screen w-full bg-black text-white selection:bg-white selection:text-black' },
-        e('video', {
-          ref: videoRef,
-          src: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260826_041744_63efcd78-bf7d-4039-99e2-2461e8a61903.mp4',
-          muted: true,
-          playsInline: true,
-          preload: 'auto',
-          onSeeked: handleSeeked,
-          className: 'fixed inset-0 z-0 h-full w-full object-cover object-[70%_center]'
-        }),
+    menuBtn.addEventListener('click', () => {
+      isOpen = !isOpen;
+      if (isOpen) {
+        mobileMenu.classList.remove('pointer-events-none', 'opacity-0');
+        mobileMenu.classList.add('pointer-events-auto', 'opacity-100');
+        bar1.classList.add('translate-y-[7px]', 'rotate-45');
+        bar2.classList.add('opacity-0');
+        bar3.classList.add('-translate-y-[7px]', '-rotate-45');
+      } else {
+        mobileMenu.classList.add('pointer-events-none', 'opacity-0');
+        mobileMenu.classList.remove('pointer-events-auto', 'opacity-100');
+        bar1.classList.remove('translate-y-[7px]', 'rotate-45');
+        bar2.classList.remove('opacity-0');
+        bar3.classList.remove('-translate-y-[7px]', '-rotate-45');
+      }
+    });
 
-        e('nav', { className: 'fixed top-0 left-0 z-10 flex w-full items-center justify-between px-5 py-4 sm:px-8 sm:py-5' },
-          e('div', { className: 'flex items-center gap-3' },
-            e('span', { className: 'text-[21px] tracking-tight text-white sm:text-[26px]', style: { fontFamily: 'var(--font-heading)' } }, 'Abzan®'),
-            e('span', { className: 'select-none text-[25px] leading-none text-white sm:text-[30px]', style: { letterSpacing: '-0.02em' } }, '✳︎')
-          ),
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        isOpen = false;
+        mobileMenu.classList.add('pointer-events-none', 'opacity-0');
+        mobileMenu.classList.remove('pointer-events-auto', 'opacity-100');
+        bar1.classList.remove('translate-y-[7px]', 'rotate-45');
+        bar2.classList.remove('opacity-0');
+        bar3.classList.remove('-translate-y-[7px]', '-rotate-45');
+      });
+    });
 
-          e('div', { className: 'hidden items-center text-[23px] text-white md:flex' },
-            ['Experience', 'Skills', 'Certifications', 'Education'].map((item, idx, arr) => 
-              e(Fragment, { key: item },
-                e('a', { href: `#${item.toLowerCase()}`, className: 'transition-opacity hover:opacity-60' }, item),
-                idx < arr.length - 1 ? e('span', null, ', ') : null
-              )
-            )
-          ),
-
-          e('a', { href: 'mailto:mohdabzan2003@gmail.com', className: 'hidden text-[23px] text-white underline underline-offset-2 transition-opacity hover:opacity-60 md:block' }, 'Get in touch'),
-
-          e('button', {
-            onClick: () => setMobileMenuOpen(!mobileMenuOpen),
-            className: 'relative z-20 flex flex-col items-center justify-center gap-[5px] focus:outline-none md:hidden',
-            'aria-label': 'Toggle Navigation'
-          },
-            e('span', { className: `h-[2px] w-6 bg-white transition-all duration-300 ${mobileMenuOpen ? 'translate-y-[7px] rotate-45' : ''}` }),
-            e('span', { className: `h-[2px] w-6 bg-white transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : 'opacity-100'}` }),
-            e('span', { className: `h-[2px] w-6 bg-white transition-all duration-300 ${mobileMenuOpen ? '-translate-y-[7px] -rotate-45' : ''}` })
-          )
-        ),
-
-        e('div', {
-          className: `fixed inset-0 z-[9] flex flex-col justify-center gap-8 bg-black/90 px-8 backdrop-blur-md transition-opacity duration-300 md:hidden ${
-            mobileMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
-          }`
-        },
-          ['Experience', 'Skills', 'Certifications', 'Education'].map(item =>
-            e('a', {
-              key: item,
-              href: `#${item.toLowerCase()}`,
-              onClick: () => setMobileMenuOpen(false),
-              className: 'text-[32px] font-medium text-white'
-            }, item)
-          ),
-          e('a', {
-            href: 'mailto:mohdabzan2003@gmail.com',
-            onClick: () => setMobileMenuOpen(false),
-            className: 'text-[32px] font-medium text-white underline underline-offset-4'
-          }, 'Get in touch')
-        ),
-
-        e('main', { className: 'relative z-[1] flex h-screen flex-col justify-end overflow-hidden px-5 pb-12 sm:px-8 md:justify-center md:px-10 md:pb-0' },
-          e('div', { className: 'relative z-10 max-w-xl' },
-            e('div', {
-              className: 'pointer-events-none mb-5 select-none sm:mb-6',
-              style: {
-                fontSize: 'clamp(18px, 4vw, 26px)',
-                lineHeight: 1.3,
-                fontWeight: 400,
-                color: '#fff',
-                filter: 'blur(4px)'
-              }
-            }, 'Hello, I am Mohammed Abzan,', e('br'), 'dnata (Emirates Group) | Dubai, UAE'),
-
-            e('p', {
-              className: 'mb-5 text-white sm:mb-6',
-              style: {
-                fontSize: 'clamp(18px, 4vw, 26px)',
-                lineHeight: 1.35,
-                fontWeight: 400,
-                minHeight: '54px'
-              }
-            },
-              displayed,
-              !done && e('span', { className: 'ml-[2px] inline-block h-[1.1em] w-[2px] align-middle bg-white animate-blink' })
-            ),
-
-            e('div', {
-              className: 'flex flex-wrap gap-y-1 transition-all duration-400 ease-out',
-              style: {
-                opacity: showPills ? 1 : 0,
-                transform: showPills ? 'translateY(0)' : 'translateY(8px)'
-              }
-            },
-              e('a', {
-                href: 'https://linkedin.com/in/mohdabzan',
-                target: '_blank',
-                className: 'mx-[0.2em] mb-[0.4em] inline-flex whitespace-nowrap items-center justify-center rounded-full border border-black/10 bg-white px-4 py-[0.3em] text-[13px] text-black transition-colors duration-200 hover:bg-black hover:text-white sm:px-5 sm:text-[15px]'
-              }, 'View LinkedIn'),
-
-              e('a', {
-                href: 'tel:+971565754523',
-                className: 'mx-[0.2em] mb-[0.4em] inline-flex whitespace-nowrap items-center justify-center rounded-full border border-black/10 bg-white px-4 py-[0.3em] text-[13px] text-black transition-colors duration-200 hover:bg-black hover:text-white sm:px-5 sm:text-[15px]'
-              }, 'Call +971 56 575 4523'),
-
-              e('button', {
-                onClick: copyEmail,
-                className: 'mx-[0.2em] mb-[0.4em] inline-flex whitespace-nowrap items-center justify-center gap-2 rounded-full border border-white bg-transparent px-4 py-[0.3em] text-[13px] text-white transition-colors duration-200 hover:bg-white hover:text-black sm:gap-3 sm:px-5 sm:text-[15px]'
-              },
-                e('span', null, 'Email: ', e('span', { className: 'underline underline-offset-1' }, 'mohdabzan2003@gmail.com')),
-                e('svg', {
-                  width: '12',
-                  height: '12',
-                  viewBox: '0 0 12 12',
-                  fill: 'none',
-                  xmlns: 'http://www.w3.org/2000/svg',
-                  className: 'shrink-0 stroke-current'
-                },
-                  e('rect', { x: '1.5', y: '3.5', width: '7', height: '7', rx: '1', strokeWidth: '1.2' }),
-                  e('path', { d: 'M3.5 1.5H9.5V7.5', strokeWidth: '1.2', strokeLinecap="round" })
-                )
-              )
-            )
-          )
-        )
-      );
+    // Copy Email Function
+    function copyEmail() {
+      navigator.clipboard.writeText("mohdabzan2003@gmail.com");
+      alert("Email address copied to clipboard!");
     }
-
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(e(App));
   </script>
 </body>
 </html>
