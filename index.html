@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abzan® | Portfolio</title>
+  <title>Mohammed Abzan® | Portfolio</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
     :root {
-      --font-heading: 'Helvetica Neue', Arial, sans-serif;
-      --font-body: 'Helvetica Neue', Arial, sans-serif;
+      --font-family: 'Helvetica Neue', Arial, sans-serif;
     }
     body {
-      font-family: var(--font-body);
+      font-family: var(--font-family);
       background-color: #000;
       color: #fff;
     }
@@ -28,7 +27,7 @@
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(8px);
+        transform: translateY(16px);
       }
       to {
         opacity: 1;
@@ -36,28 +35,40 @@
       }
     }
     .animate-pills {
-      animation: fadeInUp 0.4s ease-out 0.4s forwards;
+      animation: fadeInUp 0.5s ease-out 0.3s forwards;
       opacity: 0;
+    }
+    .card-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out, box-shadow 0.2s ease;
+    }
+    .glass-card {
+      background: rgba(18, 18, 18, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .glass-card:hover {
+      border-color: rgba(255, 255, 255, 0.35);
     }
   </style>
 </head>
 <body class="bg-black text-white selection:bg-white selection:text-black min-h-screen w-full relative">
 
-  <!-- Background Video -->
+  <!-- Interactive Background Video -->
   <video
     id="bgVideo"
     src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260826_041744_63efcd78-bf7d-4039-99e2-2461e8a61903.mp4"
     muted
     playsinline
     preload="auto"
-    class="fixed inset-0 z-0 h-full w-full object-cover object-[70%_center]"
+    class="fixed inset-0 z-0 h-full w-full object-cover object-[70%_center] opacity-40"
   ></video>
 
   <!-- Navbar -->
-  <nav class="fixed top-0 left-0 z-10 flex w-full items-center justify-between px-5 py-4 sm:px-8 sm:py-5">
-    <!-- Logo -->
+  <nav class="fixed top-0 left-0 z-50 flex w-full items-center justify-between px-6 py-5 backdrop-blur-md bg-black/40 border-b border-white/10">
     <div class="flex items-center gap-3">
-      <span class="text-[21px] font-medium tracking-tight text-white sm:text-[26px]">
+      <span class="text-[22px] font-bold tracking-tight text-white sm:text-[26px]">
         Abzan®
       </span>
       <span class="select-none text-[25px] leading-none text-white sm:text-[30px]" style="letter-spacing: -0.02em;">
@@ -66,7 +77,8 @@
     </div>
 
     <!-- Desktop Nav Links -->
-    <div class="hidden items-center text-[23px] text-white md:flex">
+    <div class="hidden items-center text-[18px] font-medium text-white md:flex">
+      <a href="#about" class="transition-opacity hover:opacity-60">About</a><span>,&nbsp;</span>
       <a href="#experience" class="transition-opacity hover:opacity-60">Experience</a><span>,&nbsp;</span>
       <a href="#skills" class="transition-opacity hover:opacity-60">Skills</a><span>,&nbsp;</span>
       <a href="#certifications" class="transition-opacity hover:opacity-60">Certifications</a><span>,&nbsp;</span>
@@ -76,7 +88,7 @@
     <!-- Desktop CTA -->
     <a 
       href="mailto:mohdabzan2003@gmail.com" 
-      className="hidden text-[23px] text-white underline underline-offset-2 transition-opacity hover:opacity-60 md:block"
+      class="hidden text-[18px] font-medium text-white underline underline-offset-4 transition-opacity hover:opacity-60 md:block"
     >
       Get in touch
     </a>
@@ -84,7 +96,7 @@
     <!-- Mobile Hamburger -->
     <button
       id="menuBtn"
-      class="relative z-20 flex flex-col items-center justify-center gap-[5px] focus:outline-none md:hidden"
+      class="relative z-50 flex flex-col items-center justify-center gap-[5px] focus:outline-none md:hidden"
       aria-label="Toggle Navigation"
     >
       <span id="bar1" class="h-[2px] w-6 bg-white transition-all duration-300"></span>
@@ -96,77 +108,205 @@
   <!-- Mobile Menu Overlay -->
   <div 
     id="mobileMenu"
-    class="fixed inset-0 z-[9] flex flex-col justify-center gap-8 bg-black/90 px-8 backdrop-blur-md transition-opacity duration-300 pointer-events-none opacity-0 md:hidden"
+    class="fixed inset-0 z-40 flex flex-col justify-center gap-8 bg-black/95 px-8 backdrop-blur-xl transition-opacity duration-300 pointer-events-none opacity-0 md:hidden"
   >
-    <a href="#experience" class="mobile-link text-[32px] font-medium text-white">Experience</a>
-    <a href="#skills" class="mobile-link text-[32px] font-medium text-white">Skills</a>
-    <a href="#certifications" class="mobile-link text-[32px] font-medium text-white">Certifications</a>
-    <a href="#education" class="mobile-link text-[32px] font-medium text-white">Education</a>
-    <a href="mailto:mohdabzan2003@gmail.com" class="mobile-link text-[32px] font-medium text-white underline underline-offset-4">Get in touch</a>
+    <a href="#about" class="mobile-link text-[30px] font-medium text-white">About</a>
+    <a href="#experience" class="mobile-link text-[30px] font-medium text-white">Experience</a>
+    <a href="#skills" class="mobile-link text-[30px] font-medium text-white">Skills</a>
+    <a href="#certifications" class="mobile-link text-[30px] font-medium text-white">Certifications</a>
+    <a href="#education" class="mobile-link text-[30px] font-medium text-white">Education</a>
+    <a href="mailto:mohdabzan2003@gmail.com" class="mobile-link text-[30px] font-medium text-white underline underline-offset-4">Get in touch</a>
   </div>
 
   <!-- Hero Section -->
-  <main class="relative z-[1] flex h-screen flex-col justify-end overflow-hidden px-5 pb-12 sm:px-8 md:justify-center md:px-10 md:pb-0">
-    <div class="relative z-10 max-w-xl">
-      <!-- Blurred Intro Label -->
-      <div 
-        class="pointer-events-none mb-5 select-none sm:mb-6"
-        style="font-size: clamp(18px, 4vw, 26px); line-height: 1.3; font-weight: 400; color: #fff; filter: blur(4px);"
-      >
-        Hello, I am Mohammed Abzan,<br />
-        dnata (Emirates Group) | Dubai, UAE
+  <section id="about" class="relative z-10 flex min-h-screen flex-col justify-center px-6 pt-24 pb-16 md:px-16">
+    <div class="max-w-3xl">
+      <!-- Clear Intro Label -->
+      <div class="mb-4 inline-block rounded-full bg-white/10 px-4 py-1.5 text-sm font-semibold tracking-wider text-white uppercase backdrop-blur-md border border-white/20">
+        Mohammed Abzan • Dubai, UAE[cite: 1]
       </div>
 
+      <!-- Main Heading -->
+      <h1 class="mb-4 text-4xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+        Administration & Operations Specialist
+      </h1>
+
       <!-- Typewriter Text -->
-      <p 
-        class="mb-5 text-white sm:mb-6"
-        style="font-size: clamp(18px, 4vw, 26px); line-height: 1.35; font-weight: 400; min-height: 54px;"
-      >
+      <p class="mb-8 text-xl sm:text-2xl text-gray-200 font-normal leading-relaxed min-h-[70px]">
         <span id="typewriterText"></span><span id="cursor" class="ml-[2px] inline-block h-[1.1em] w-[2px] align-middle bg-white animate-blink"></span>
       </p>
 
       <!-- Action Pills -->
-      <div class="flex flex-wrap gap-y-1 animate-pills">
+      <div class="flex flex-wrap gap-3 animate-pills">
         <a
           href="https://linkedin.com/in/mohdabzan"
           target="_blank"
-          class="mx-[0.2em] mb-[0.4em] inline-flex whitespace-nowrap items-center justify-center rounded-full border border-black/10 bg-white px-4 py-[0.3em] text-[13px] text-black transition-colors duration-200 hover:bg-black hover:text-white sm:px-5 sm:text-[15px]"
+          class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-bold text-black transition-transform duration-200 hover:scale-105 hover:bg-gray-200"
         >
-          View LinkedIn
+          View LinkedIn Profile[cite: 1]
         </a>
 
         <a
           href="tel:+971565754523"
-          class="mx-[0.2em] mb-[0.4em] inline-flex whitespace-nowrap items-center justify-center rounded-full border border-black/10 bg-white px-4 py-[0.3em] text-[13px] text-black transition-colors duration-200 hover:bg-black hover:text-white sm:px-5 sm:text-[15px]"
+          class="inline-flex items-center justify-center rounded-full border border-white/30 bg-black/50 px-6 py-3 text-sm font-semibold text-white backdrop-blur-md transition-transform duration-200 hover:scale-105 hover:border-white hover:bg-white/10"
         >
-          Call +971 56 575 4523
+          Call +971 56 575 4523[cite: 1]
         </a>
 
         <button
           onclick="copyEmail()"
-          class="mx-[0.2em] mb-[0.4em] inline-flex whitespace-nowrap items-center justify-center gap-2 rounded-full border border-white bg-transparent px-4 py-[0.3em] text-[13px] text-white transition-colors duration-200 hover:bg-white hover:text-black sm:gap-3 sm:px-5 sm:text-[15px]"
+          class="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-black/50 px-6 py-3 text-sm font-semibold text-white backdrop-blur-md transition-transform duration-200 hover:scale-105 hover:border-white hover:bg-white/10"
         >
-          <span>
-            Email: <span class="underline underline-offset-1">mohdabzan2003@gmail.com</span>
-          </span>
-          <svg 
-            width="12" 
-            height="12" 
-            viewBox="0 0 12 12" 
-            fill="none" 
-            xmlns="http://www.w3.org/2000/svg"
-            class="shrink-0 stroke-current"
-          >
+          <span>Email: mohdabzan2003@gmail.com[cite: 1]</span>
+          <svg width="14" height="14" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0 stroke-current">
             <rect x="1.5" y="3.5" width="7" height="7" rx="1" stroke-width="1.2" />
             <path d="M3.5 1.5H9.5V7.5" stroke-width="1.2" stroke-linecap="round" />
           </svg>
         </button>
       </div>
     </div>
-  </main>
+  </section>
+
+  <!-- Content Container -->
+  <div class="relative z-10 space-y-24 px-6 pb-24 md:px-16 max-w-7xl mx-auto">
+    
+    <!-- Experience Section -->
+    <section id="experience" class="space-y-8">
+      <h2 class="text-3xl font-bold tracking-tight text-white border-b border-white/20 pb-4">
+        Professional Experience
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Job Card 1 -->
+        <div class="glass-card card-3d rounded-2xl p-8 space-y-4 shadow-2xl">
+          <div class="flex justify-between items-start flex-wrap gap-2">
+            <div>
+              <h3 class="text-2xl font-bold text-white">Administrative Assistant[cite: 1]</h3>
+              <p class="text-gray-300 font-medium">dnata (Emirates Group) • Dubai International Airport[cite: 1]</p>
+            </div>
+            <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white">2025 - Present[cite: 1]</span>
+          </div>
+          <ul class="space-y-2 text-gray-300 text-sm list-disc list-inside leading-relaxed">
+            <li>Manage document archiving for cargo and operational records, keeping filing systems audit-ready for management reviews[cite: 1].</li>
+            <li>Support environmental and sustainability initiatives, including compliance record-keeping and sustainability reporting[cite: 1].</li>
+            <li>Resolve customer service enquiries from international airlines, freight forwarders, and internal operational teams[cite: 1].</li>
+            <li>Provide administrative coordination across warehouse, cargo operations, and management teams[cite: 1].</li>
+            <li>Maintain data entry accuracy across internal logistics systems supporting executive departmental reports[cite: 1].</li>
+          </ul>
+        </div>
+
+        <!-- Job Card 2 -->
+        <div class="glass-card card-3d rounded-2xl p-8 space-y-4 shadow-2xl">
+          <div class="flex justify-between items-start flex-wrap gap-2">
+            <div>
+              <h3 class="text-2xl font-bold text-white">Cargo & Customer Service Agent[cite: 1]</h3>
+              <p class="text-gray-300 font-medium">dnata (Emirates Group) • Dubai International Airport[cite: 1]</p>
+            </div>
+            <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white">2024 - 2025[cite: 1]</span>
+          </div>
+          <ul class="space-y-2 text-gray-300 text-sm list-disc list-inside leading-relaxed">
+            <li>Served as primary contact for international airlines, freight forwarders, managing import/export cargo queries end-to-end[cite: 1].</li>
+            <li>Maintained compliance records for AWB, Dangerous Goods, Pharma, and AVI/HUM shipments following IATA & GCAA standards[cite: 1].</li>
+            <li>Prepared billing reports, invoices, and inventory tracking logs for executive department head reviews[cite: 1].</li>
+            <li>Guided clients through the Calogi digital platform, streamlining digital operations and reducing inquiry repeat rates[cite: 1].</li>
+            <li>Executed ULD build-up and breakdown ensuring load integrity, weight compliance, and safety adherence[cite: 1].</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills & Software Section -->
+    <section id="skills" class="space-y-8">
+      <h2 class="text-3xl font-bold tracking-tight text-white border-b border-white/20 pb-4">
+        Skills & Capabilities[cite: 1]
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass-card card-3d rounded-xl p-6 space-y-3">
+          <h3 class="text-xl font-semibold text-white">Core Operations[cite: 1]</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-white/10 text-xs px-3 py-1.5 rounded-md">Cargo Operations[cite: 1]</span>
+            <span class="bg-white/10 text-xs px-3 py-1.5 rounded-md">Customer Service[cite: 1]</span>
+            <span class="bg-white/10 text-xs px-3 py-1.5 rounded-md">Document Control[cite: 1]</span>
+            <span class="bg-white/10 text-xs px-3 py-1.5 rounded-md">Sustainability Coordination[cite: 1]</span>
+            <span class="bg-white/10 text-xs px-3 py-1.5 rounded-md">Cross-Departmental Support[cite: 1]</span>
+          </div>
+        </div>
+
+        <div class="glass-card card-3d rounded-xl p-6 space-y-3">
+          <h3 class="text-xl font-semibold text-white">Software & Tools[cite: 1]</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-white/10 text-xs px-3 py-1.5 rounded-md">Microsoft 365 (Excel, Word, PowerPoint)[cite: 1]</span>
+            <span class="bg-white/10 text-xs px-3 py-1.5 rounded-md">Power BI[cite: 1]</span>
+            <span class="bg-white/10 text-xs px-3 py-1.5 rounded-md">One Cargo[cite: 1]</span>
+            <span class="bg-white/10 text-xs px-3 py-1.5 rounded-md">Calogi Digital Platform[cite: 1]</span>
+          </div>
+        </div>
+
+        <div class="glass-card card-3d rounded-xl p-6 space-y-3">
+          <h3 class="text-xl font-semibold text-white">Emerging Tech & Languages[cite: 1]</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-white/10 text-xs px-3 py-1.5 rounded-md">AI Prompt Engineering[cite: 1]</span>
+            <span class="bg-white/10 text-xs px-3 py-1.5 rounded-md">English[cite: 1]</span>
+            <span class="bg-white/10 text-xs px-3 py-1.5 rounded-md">Hindi[cite: 1]</span>
+            <span class="bg-white/10 text-xs px-3 py-1.5 rounded-md">Urdu[cite: 1]</span>
+            <span class="bg-white/10 text-xs px-3 py-1.5 rounded-md">Kannada[cite: 1]</span>
+            <span class="bg-white/10 text-xs px-3 py-1.5 rounded-md">Tulu[cite: 1]</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications & Education -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Certifications -->
+      <section id="certifications" class="space-y-6">
+        <h2 class="text-3xl font-bold tracking-tight text-white border-b border-white/20 pb-4">
+          Certifications[cite: 1]
+        </h2>
+        <div class="space-y-4">
+          <div class="glass-card card-3d rounded-xl p-5">
+            <h3 class="font-bold text-white">One Million Prompters AI Prompt Engineering[cite: 1]</h3>
+            <p class="text-sm text-gray-300">Dubai Future Foundation / DCAI[cite: 1]</p>
+          </div>
+          <div class="glass-card card-3d rounded-xl p-5">
+            <h3 class="font-bold text-white">Emirates Aviation Dangerous Goods Handling[cite: 1]</h3>
+            <p class="text-sm text-gray-300">dnata (Emirates Group)[cite: 1]</p>
+          </div>
+          <div class="glass-card card-3d rounded-xl p-5">
+            <h3 class="font-bold text-white">Cargo Product Knowledge & Documentation[cite: 1]</h3>
+            <p class="text-sm text-gray-300">dnata (Emirates Group)[cite: 1]</p>
+          </div>
+          <div class="glass-card card-3d rounded-xl p-5">
+            <h3 class="font-bold text-white">Fundamentals of Cargo Operations (Export)[cite: 1]</h3>
+            <p class="text-sm text-gray-300">dnata (Emirates Group)[cite: 1]</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section id="education" class="space-y-6">
+        <h2 class="text-3xl font-bold tracking-tight text-white border-b border-white/20 pb-4">
+          Education[cite: 1]
+        </h2>
+        <div class="glass-card card-3d rounded-xl p-8 space-y-3">
+          <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white">2021 - 2024[cite: 1]</span>
+          <h3 class="text-2xl font-bold text-white">Bachelor of Commerce (B.Com)[cite: 1]</h3>
+          <p class="text-lg text-gray-200">Major in Business Management[cite: 1]</p>
+          <p class="text-sm text-gray-400">Mangalore University, India[cite: 1]</p>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="relative z-10 border-t border-white/10 bg-black/80 py-8 text-center text-sm text-gray-400">
+    <p>© Mohammed Abzan. All rights reserved. • Dubai, UAE • UAE Driving Licence[cite: 1]</p>
+  </footer>
 
   <script>
-    // Video Mouse Scrubbing
+    // Video Mouse Scrubbing Effect
     const video = document.getElementById('bgVideo');
     let prevX = null;
     let targetTime = 0;
@@ -201,8 +341,22 @@
       }
     });
 
+    // 3D Card Physics Interaction
+    document.querySelectorAll('.card-3d').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        card.style.transform = `perspective(1000px) rotateX(${-y / 20}deg) rotateY(${x / 20}deg) scale3d(1.02, 1.02, 1.02)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      });
+    });
+
     // Typewriter Effect
-    const fullText = "Admin & Operations professional specializing in cargo logistics, document control, and customer service. How can we collaborate?";
+    const fullText = "Administration and customer service professional with over two years of experience at dnata (Emirates Group), Dubai International Airport, specializing in cargo operations, sustainability coordination, and data control.";
     const textEl = document.getElementById('typewriterText');
     const cursorEl = document.getElementById('cursor');
     let index = 0;
@@ -216,8 +370,8 @@
           clearInterval(interval);
           cursorEl.style.display = 'none';
         }
-      }, 35);
-    }, 500);
+      }, 30);
+    }, 400);
 
     // Mobile Navigation Toggle
     const menuBtn = document.getElementById('menuBtn');
@@ -258,7 +412,7 @@
     // Copy Email Function
     function copyEmail() {
       navigator.clipboard.writeText("mohdabzan2003@gmail.com");
-      alert("Email address copied to clipboard!");
+      alert("Email copied to clipboard!");
     }
   </script>
 </body>
