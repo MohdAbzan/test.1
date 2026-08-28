@@ -3,484 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammed Abzan | Portfolio</title>
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>Portfolio | Modern & Interactive</title>
     <style>
-        :root {
-            --bg-color: #0b0f19;
-            --card-bg: #111827;
-            --card-border: #1f2937;
-            --accent-color: #06b6d4;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            scroll-behavior: smooth;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: #0d0f12;
+            color: #f3f4f6;
             overflow-x: hidden;
         }
 
-        /* Navbar */
-        nav {
+        /* Ambient Glow Background */
+        .glow-bg {
             position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(11, 15, 25, 0.85);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 8%;
-            overflow: hidden;
-        }
-
-        .hero-bg-parallax {
-            position: absolute;
             top: -20%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, rgba(0,0,0,0) 70%);
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            border-radius: 50%;
             z-index: -1;
             pointer-events: none;
         }
 
-        .hero-content {
+        .glow-bg-2 {
+            position: fixed;
+            bottom: -20%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(79, 172, 254, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Hero Section */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        p.subtitle {
+            font-size: 1.25rem;
+            color: #9ca3af;
             max-width: 600px;
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .hero-title span {
-            color: var(--accent-color);
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            background-color: var(--accent-color);
-            color: #000;
-            font-weight: 600;
-            border-radius: 6px;
-            text-decoration: none;
-            transition: 0.3s ease;
-        }
-
-        .btn:hover {
-            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .hero-img-container {
-            position: relative;
-            width: 380px;
-            height: 380px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid var(--accent-color);
-            box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
-        }
-
-        .hero-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Sections General */
-        section {
-            padding: 100px 8%;
-        }
-
-        .section-header {
-            font-size: 2.2rem;
             margin-bottom: 40px;
-            position: relative;
-            display: inline-block;
+            line-height: 1.6;
         }
 
-        .section-header::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -8px;
-            width: 50%;
-            height: 3px;
-            background-color: var(--accent-color);
-        }
-
-        /* Experience Section */
-        .timeline {
-            position: relative;
-            border-left: 2px solid var(--card-border);
-            padding-left: 30px;
-            margin-left: 10px;
-        }
-
-        .timeline-item {
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -37px;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: var(--accent-color);
+        /* Interactive Card */
+        .projects {
+            max-width: 1100px;
+            margin: 0 auto 100px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: 25px;
-            border-radius: 8px;
-            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
         }
 
         .card:hover {
-            border-color: var(--accent-color);
+            transform: translateY(-8px);
+            border-color: rgba(0, 242, 254, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.1);
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .card-subtitle {
-            color: var(--accent-color);
-            font-size: 0.95rem;
+        .card h3 {
+            font-size: 1.5rem;
             margin-bottom: 12px;
+            color: #ffffff;
         }
 
-        .card-date {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        .card-list {
-            padding-left: 20px;
-            color: var(--text-muted);
-        }
-
-        .card-list li {
-            margin-bottom: 8px;
+        .card p {
+            color: #9ca3af;
             font-size: 0.95rem;
-        }
-
-        /* Skills & Certifications Grid */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .skill-badge {
-            background-color: rgba(6, 182, 212, 0.1);
-            color: var(--accent-color);
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 1px solid rgba(6, 182, 212, 0.2);
-            font-size: 0.9rem;
-        }
-
-        /* Contact Section */
-        .contact-info {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1rem;
-            color: var(--text-muted);
-        }
-
-        .contact-item i {
-            color: var(--accent-color);
-            font-size: 1.2rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            border-top: 1px solid var(--card-border);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero {
-                flex-direction: column-reverse;
-                justify-content: center;
-                gap: 40px;
-                padding-top: 100px;
-                text-align: center;
-            }
-
-            .hero-img-container {
-                width: 250px;
-                height: 250px;
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">M. ABZAN</div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    <div class="glow-bg"></div>
+    <div class="glow-bg-2"></div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="about">
-        <div class="hero-bg-parallax" id="parallax-glow"></div>
-        <div class="hero-content gs-reveal">
-            <h1 class="hero-title">Mohammed <span>Abzan</span></h1>
-            <p class="hero-subtitle">Administration & Customer Service Professional | Cargo Operations & Sustainability Coordination</p>
-            <a href="#contact" class="btn">Get In Touch</a>
+    <header>
+        <h1>Creative Portfolio</h1>
+        <p class="subtitle">Designing modern interactive digital experiences with cutting-edge UI/UX aesthetics.</p>
+    </header>
+
+    <section class="projects">
+        <div class="card">
+            <h3>3D Interactive Landscapes</h3>
+            <p>Immersive WebGL experience built with Three.js and custom shaders.</p>
         </div>
-        <div class="hero-img-container gs-reveal">
-            <img src="profile.jpg" alt="Mohammed Abzan">
+        <div class="card">
+            <h3>Glow Transformation UI</h3>
+            <p>Dynamic visual design featuring smooth transitions and interactive lighting.</p>
         </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience">
-        <h2 class="section-header gs-reveal">Work Experience</h2>
-        <div class="timeline">
-            
-            <div class="timeline-item gs-reveal">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Administrative Assistant</div>
-                        <div class="card-date">2025 - Present</div>
-                    </div>
-                    <div class="card-subtitle">dnata (Emirates Group) | Dubai International Airport</div>
-                    <ul class="card-list">
-                        <li>Manage document archiving for cargo and operational records, maintaining audit-ready systems.</li>
-                        <li>Support environmental and sustainability initiatives and compliance reporting.</li>
-                        <li>Handle customer service enquiries from airlines, freight forwarders, and internal teams.</li>
-                        <li>Provide administrative support including correspondence, scheduling, and departmental coordination.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="timeline-item gs-reveal">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Cargo & Customer Service Agent</div>
-                        <div class="card-date">2024 - 2025</div>
-                    </div>
-                    <div class="card-subtitle">dnata (Emirates Group) | Dubai International Airport</div>
-                    <ul class="card-list">
-                        <li>Primary point of contact for international airlines, freight forwarders, and corporate clients.</li>
-                        <li>Maintained compliance-grade records for AWB, Dangerous Goods, Pharmaceutical, and AVI/HUM shipments (IATA/GCAA standards).</li>
-                        <li>Guided customers through the Calogi digital platform to improve efficiency.</li>
-                        <li>Managed billing reports, invoices, inventory trackers, and ULD build-up/breakdown operations.</li>
-                    </ul>
-                </div>
-            </div>
-
+        <div class="card">
+            <h3>Custom Cursor Animations</h3>
+            <p>Fluid, physics-based mouse cursor interactions for sleek navigation.</p>
         </div>
     </section>
 
-    <!-- Skills & Education Section -->
-    <section id="skills">
-        <div class="grid-2">
-            
-            <div class="gs-reveal">
-                <h2 class="section-header">Core Skills</h2>
-                <div class="skills-container">
-                    <span class="skill-badge">Customer Service</span>
-                    <span class="skill-badge">Cargo Operations</span>
-                    <span class="skill-badge">Document Archiving & Control</span>
-                    <span class="skill-badge">Sustainability Coordination</span>
-                    <span class="skill-badge">Microsoft 365</span>
-                    <span class="skill-badge">Power BI</span>
-                    <span class="skill-badge">AI Prompt Engineering</span>
-                    <span class="skill-badge">Calogi & One Cargo</span>
-                </div>
-            </div>
-
-            <div class="gs-reveal">
-                <h2 class="section-header">Education & Certifications</h2>
-                <div class="card" style="margin-bottom: 15px;">
-                    <div class="card-title">Bachelor of Commerce (B.Com)</div>
-                    <div class="card-subtitle" style="margin:0;">Business Management | Mangalore University (2021-2024)</div>
-                </div>
-                <div class="card">
-                    <div class="card-title" style="font-size: 1rem; margin-bottom: 5px;">Key Certifications</div>
-                    <ul class="card-list" style="font-size: 0.85rem;">
-                        <li>One Million Prompters AI Prompt Engineering (Dubai Future Foundation)</li>
-                        <li>Emirates Aviation Dangerous Goods Handling (dnata)</li>
-                        <li>Cargo Product Knowledge & Documentation (dnata)</li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="gs-reveal">
-        <h2 class="section-header">Contact Information</h2>
-        <div class="contact-info">
-            <div class="contact-item">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>Dubai, UAE (UAE Driving Licence)</span>
-            </div>
-            <div class="contact-item">
-                <i class="fa-solid fa-phone"></i>
-                <span>+971 56 575 4523</span>
-            </div>
-            <div class="contact-item">
-                <i class="fa-solid fa-envelope"></i>
-                <span>mohdabzan2003@gmail.com</span>
-            </div>
-            <div class="contact-item">
-                <i class="fa-brands fa-linkedin"></i>
-                <span>linkedin.com/in/mohdabzan</span>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 Mohammed Abzan. All Rights Reserved.</p>
-    </footer>
-
-    <!-- GSAP & ScrollTrigger CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-    <script>
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Parallax Effect on Hero Background Glow
-        gsap.to("#parallax-glow", {
-            scrollTrigger: {
-                trigger: ".hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: true
-            },
-            y: 150,
-            opacity: 0.3
-        });
-
-        // Reveal Animations on Scroll
-        const revealElements = document.querySelectorAll(".gs-reveal");
-
-        revealElements.forEach((el) => {
-            gsap.fromTo(el, 
-                { opacity: 0, y: 50 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 85%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-        });
-    </script>
 </body>
 </html>
