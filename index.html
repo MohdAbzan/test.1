@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mainframe®</title>
+  <title>Abzan® | Portfolio</title>
 
   <!-- Fonts -->
   <link rel="stylesheet" href="https://db.onlinewebfonts.com/c/5ac3fe7c6abd2f62067f266d89671492?family=HelveticaNowDisplay-Medium" />
@@ -42,7 +42,7 @@
     const e = React.createElement;
     const { useState, useEffect, useRef, Fragment } = React;
 
-    function useTypewriter(text, speed = 38, startDelay = 600) {
+    function useTypewriter(text, speed = 35, startDelay = 500) {
       const [displayed, setDisplayed] = useState('');
       const [done, setDone] = useState(false);
 
@@ -80,8 +80,8 @@
       const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
       const [showPills, setShowPills] = useState(false);
 
-      const typewriterText = "Glad you stopped in. Good taste tends to find us. Now, what are we building?";
-      const { displayed, done } = useTypewriter(typewriterText, 38, 600);
+      const typewriterText = "Admin & Operations professional specializing in cargo logistics, document control, and customer service. How can we collaborate?";
+      const { displayed, done } = useTypewriter(typewriterText, 35, 500);
 
       useEffect(() => {
         const timer = setTimeout(() => {
@@ -132,7 +132,7 @@
       };
 
       const copyEmail = () => {
-        navigator.clipboard.writeText("hello@mainframe.co");
+        navigator.clipboard.writeText("mohdabzan2003@gmail.com");
       };
 
       return e('div', { className: 'relative min-h-screen w-full bg-black text-white selection:bg-white selection:text-black' },
@@ -148,12 +148,12 @@
 
         e('nav', { className: 'fixed top-0 left-0 z-10 flex w-full items-center justify-between px-5 py-4 sm:px-8 sm:py-5' },
           e('div', { className: 'flex items-center gap-3' },
-            e('span', { className: 'text-[21px] tracking-tight text-white sm:text-[26px]', style: { fontFamily: 'var(--font-heading)' } }, 'Mainframe®'),
+            e('span', { className: 'text-[21px] tracking-tight text-white sm:text-[26px]', style: { fontFamily: 'var(--font-heading)' } }, 'Abzan®'),
             e('span', { className: 'select-none text-[25px] leading-none text-white sm:text-[30px]', style: { letterSpacing: '-0.02em' } }, '✳︎')
           ),
 
           e('div', { className: 'hidden items-center text-[23px] text-white md:flex' },
-            ['Labs', 'Studio', 'Openings', 'Shop'].map((item, idx, arr) => 
+            ['Experience', 'Skills', 'Certifications', 'Education'].map((item, idx, arr) => 
               e(Fragment, { key: item },
                 e('a', { href: `#${item.toLowerCase()}`, className: 'transition-opacity hover:opacity-60' }, item),
                 idx < arr.length - 1 ? e('span', null, ', ') : null
@@ -161,7 +161,7 @@
             )
           ),
 
-          e('a', { href: '#contact', className: 'hidden text-[23px] text-white underline underline-offset-2 transition-opacity hover:opacity-60 md:block' }, 'Get in touch'),
+          e('a', { href: 'mailto:mohdabzan2003@gmail.com', className: 'hidden text-[23px] text-white underline underline-offset-2 transition-opacity hover:opacity-60 md:block' }, 'Get in touch'),
 
           e('button', {
             onClick: () => setMobileMenuOpen(!mobileMenuOpen),
@@ -179,7 +179,7 @@
             mobileMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
           }`
         },
-          ['Labs', 'Studio', 'Openings', 'Shop'].map(item =>
+          ['Experience', 'Skills', 'Certifications', 'Education'].map(item =>
             e('a', {
               key: item,
               href: `#${item.toLowerCase()}`,
@@ -188,7 +188,7 @@
             }, item)
           ),
           e('a', {
-            href: '#contact',
+            href: 'mailto:mohdabzan2003@gmail.com',
             onClick: () => setMobileMenuOpen(false),
             className: 'text-[32px] font-medium text-white underline underline-offset-4'
           }, 'Get in touch')
@@ -205,7 +205,7 @@
                 color: '#fff',
                 filter: 'blur(4px)'
               }
-            }, 'Hey there, meet A.R.I.A,', e('br'), "Mainframe's Adaptive Response Interface Agent"),
+            }, 'Hello, I am Mohammed Abzan,', e('br'), 'dnata (Emirates Group) | Dubai, UAE'),
 
             e('p', {
               className: 'mb-5 text-white sm:mb-6',
@@ -227,18 +227,22 @@
                 transform: showPills ? 'translateY(0)' : 'translateY(8px)'
               }
             },
-              ['Pitch us an idea', 'Come work here', 'Send a brief hello', 'See how we operate'].map(label =>
-                e('button', {
-                  key: label,
-                  className: 'mx-[0.2em] mb-[0.4em] inline-flex whitespace-nowrap items-center justify-center rounded-full border border-black/10 bg-white px-4 py-[0.3em] text-[13px] text-black transition-colors duration-200 hover:bg-black hover:text-white sm:px-5 sm:text-[15px]'
-                }, label)
-              ),
+              e('a', {
+                href: 'https://linkedin.com/in/mohdabzan',
+                target: '_blank',
+                className: 'mx-[0.2em] mb-[0.4em] inline-flex whitespace-nowrap items-center justify-center rounded-full border border-black/10 bg-white px-4 py-[0.3em] text-[13px] text-black transition-colors duration-200 hover:bg-black hover:text-white sm:px-5 sm:text-[15px]'
+              }, 'View LinkedIn'),
+
+              e('a', {
+                href: 'tel:+971565754523',
+                className: 'mx-[0.2em] mb-[0.4em] inline-flex whitespace-nowrap items-center justify-center rounded-full border border-black/10 bg-white px-4 py-[0.3em] text-[13px] text-black transition-colors duration-200 hover:bg-black hover:text-white sm:px-5 sm:text-[15px]'
+              }, 'Call +971 56 575 4523'),
 
               e('button', {
                 onClick: copyEmail,
                 className: 'mx-[0.2em] mb-[0.4em] inline-flex whitespace-nowrap items-center justify-center gap-2 rounded-full border border-white bg-transparent px-4 py-[0.3em] text-[13px] text-white transition-colors duration-200 hover:bg-white hover:text-black sm:gap-3 sm:px-5 sm:text-[15px]'
               },
-                e('span', null, 'Reach us: ', e('span', { className: 'underline underline-offset-1' }, 'hello@mainframe.co')),
+                e('span', null, 'Email: ', e('span', { className: 'underline underline-offset-1' }, 'mohdabzan2003@gmail.com')),
                 e('svg', {
                   width: '12',
                   height: '12',
@@ -248,7 +252,7 @@
                   className: 'shrink-0 stroke-current'
                 },
                   e('rect', { x: '1.5', y: '3.5', width: '7', height: '7', rx: '1', strokeWidth: '1.2' }),
-                  e('path', { d: 'M3.5 1.5H9.5V7.5', strokeWidth: '1.2', strokeLinecap: 'round' })
+                  e('path', { d: 'M3.5 1.5H9.5V7.5', strokeWidth: '1.2', strokeLinecap="round" })
                 )
               )
             )
